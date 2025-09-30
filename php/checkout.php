@@ -22,7 +22,7 @@ use Kreait\Firebase\Exception\Auth\InvalidToken;
 
 // 2. Configurar o Firebase Admin SDK
 try {
-    $factory = (new Factory)->withServiceAccount('imperium-0001-firebase-adminsdk-fbsvc-ffc86182cf.json');
+    $factory = (new Factory)->withServiceAccount(__DIR__ . '../imperium-0001-firebase-adminsdk-fbsvc-ffc86182cf.json');
     $auth = $factory->createAuth();
 } catch (\Exception $e) {
     http_response_code(500);

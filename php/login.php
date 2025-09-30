@@ -4,7 +4,7 @@ session_start();
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     // O usuário não está logado, redireciona para a página de login
-    header('Location: login.html');
+    header('Location: ../html/cadastro_login.html');
     exit;
 }
 

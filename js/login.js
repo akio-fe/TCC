@@ -4,7 +4,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  AppleAuthProvider,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -27,43 +26,6 @@ const loginForm = document.getElementById("login-form");
 const emailInput = document.getElementById("email-login");
 const passwordInput = document.getElementById("senha-login");
 const messageElement = document.getElementById("login-message");
-const appleButton = document.getElementById("appleButton");
-// Certifique-se de que este elemento existe no seu HTML
-const appleMessageDiv = document.getElementById("apple-message"); 
-
-appleButton.addEventListener("click", async () => {
-  // MUDANÇA 2: Usar um nome específico para o provedor da Apple.
-  const appleProvider = new AppleAuthProvider();
-
-  try {
-    // MUDANÇA 3: Usar a nova variável do provedor da Apple.
-    const result = await signInWithPopup(auth, appleProvider);
-
-    const idToken = await result.user.getIdToken();
-
-    const response = await fetch("../php/apple_login.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `idToken=${encodeURIComponent(idToken)}`,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      appleMessageDiv.textContent = `Login com Apple bem-sucedido! UID: ${data.uid}`;
-      appleMessageDiv.style.color = "green";
-    } else {
-      appleMessageDiv.textContent = `Erro no backend: ${data.message}`;
-      appleMessageDiv.style.color = "red";
-    }
-  } catch (error) {
-    appleMessageDiv.textContent = `Erro: ${error.message}`;
-    appleMessageDiv.style.color = "red";
-    console.error("Erro no login com Apple:", error);
-  }
-});
 
 document
   .getElementById("googleButton")

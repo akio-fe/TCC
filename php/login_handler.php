@@ -19,11 +19,10 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Exception\Auth\ExpiredIdToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use Kreait\Firebase\Exception\Auth\InvalidToken;
-use Kreait\Firebase\Exception\Auth\AuthException;
 use \InvalidArgumentException;
 
 $factory = (new Factory)
-    ->withServiceAccount('imperium-0001-firebase-adminsdk-fbsvc-ffc86182cf.json');
+    ->withServiceAccount(__DIR__ . '/imperium-0001-firebase-adminsdk-fbsvc-ffc86182cf.json');
 $auth = $factory->createAuth();
 
 $headers = getallheaders();
@@ -58,7 +57,7 @@ try {
         'uid' => $uid
     ]);
 
-} catch (ExpiredIdToken $e) {
+} catch (\Kreait\Firebase\Exception\Auth\ExpiredIdToken $e) {
     // Captura se o token expirou
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Sessão expirada. Faça login novamente.']);
@@ -66,11 +65,11 @@ try {
     // Captura se o token foi revogado
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Sessão revogada. Faça login novamente.']);
-} catch (InvalidToken $e) {
+} catch (\Kreait\Firebase\Exception\Auth\InvalidToken $e) {
     // Captura tokens inválidos de forma geral
     http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Token de autenticação inválido.']);
-} catch (AuthException $e) {
+    echo json_encode(['success' => false, 'message' => 'Token de autenticação inválido: ' . $e->getMessage()]);
+} catch (\Kreait\Firebase\Exception\AuthException $e) {
     // Captura outras exceções de autenticação
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Erro de autenticação: ' . $e->getMessage()]);

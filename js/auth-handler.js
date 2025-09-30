@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!user) {
         authMessage.textContent =
           "Sessão de usuário não encontrada. Por favor, faça login para continuar.";
-        setTimeout(() => (window.location.href = "login.html"), 3000);
+        setTimeout(() => (window.location.href = "../html/cadastro_login.html"), 3000);
         return;
       }
 
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Enviar os dados para o seu servidor de backend
         const idToken = await user.getIdToken();
-        const response = await fetch("php/checkout.php", {
+        const response = await fetch("../php/checkout.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "E-mail verificado e dados salvos! Redirecionando...";
           // Apagar o documento temporário do Firestore
           await deleteDoc(docRef);
-          setTimeout(() => (window.location.href = "index.html"), 3000);
+          setTimeout(() => (window.location.href = "../index.html"), 3000);
         } else {
           authMessage.textContent =
             "E-mail verificado, mas ocorreu um erro ao salvar dados. Entre em contato com o suporte.";
