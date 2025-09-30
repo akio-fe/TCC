@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login/cadastro</title>
+    <link rel="stylesheet" href="../css/loginstyle.css">
+
+    <script src="../js/script.js" defer></script>
+
+    <!-- Inserção de ícones -->
+    <script src="https://kit.fontawesome.com/bf477ee59c.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <section class="containerPai">
+
+        <span class="exit">
+            <a href="../index.html"><img src="../public/images/backarrow.png" alt=""></a>
+        </span>
+
+        <div class="card loginActive">
+
+
+            <div class="esquerda">
+
+                <div class="formLogin">
+                    <h2>Fazer Login</h2>
+                    <form action="">
+                        <input type="email" id="email_login" placeholder="E-mail">
+                        <input type="password" id="senha_login" placeholder="Senha">
+                        <button type="submit" id="btn_login">Entrar</button>
+                        <div>
+                            <a href="esqueci.html">Esqueci a senha</a>
+                        </div>
+                        <div id="mensagem-firebase-login"></div>
+                    </form>
+                </div>
+                <div class="facaLogin">
+                    <h2>Já tem <br>uma conta?</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem quos voluptatem impedit.</p>
+                    <button class="loginButton">Faça login</button>                    
+                </div>
+
+            </div>
+
+            <div class="direita">
+
+                <div class="formCadastro">
+                    <h2>Cadastro</h2>
+                    <form action="">
+                        <input type="text" id="nome" name="nome" placeholder="Nome">
+                        <input type="text" id="CPF" name="CPF" placeholder="CPF">
+                        <input type="email" id="email" name="email" placeholder="E-mail">
+                        <input type="password" id="senha" name="senha" placeholder="Senha">
+                        <input type="password" id="confirma_senha" name="confirma_senha"
+                            placeholder="Confirme a sua senha">
+                        <button type="submit">Cadastrar</button>
+                        <div id="mensagem-firebase"></div>
+                    </form>
+                </div>
+                <div class="facaCadastro">
+                    <h2>Não tem <br>uma conta?</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam recusandae eaque repellat?</p>
+                    <button class="cadastroButton">Cadastre-se</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <script src="js/form-mask.js"></script>
+    <script type="module" src="js/cadastro.js"></script>
+    <script type="module" src="js/login.js"></script>
+
+</body>
+
+</html>

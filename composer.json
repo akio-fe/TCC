@@ -1,0 +1,19 @@
+{
+    "name": "fe_ak/imperium",
+    "description": "Unificaçao das funçoes e dos programas do site do tcc",
+    "autoload": {
+        "psr-4": {
+            "FeAk\\Imperium\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "akio-fe",
+            "email": "fe.akio20@gmail.com"
+        }
+    ],
+    "require": {
+        "kreait/firebase-php": "^5.26",
+        "mercadopago/dx-php": "^3.7"
+    }
+}
