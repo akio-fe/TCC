@@ -1,4 +1,7 @@
+// Importações do Firebase App (necessário para inicializar o Firebase)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+// Importações do Firebase Authentication
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,12 +11,14 @@ import {
   GoogleAuthProvider,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
+// Importações do Firestore
 import {
   getFirestore,
   doc,
   setDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; // <--- Importação corrigida aqui!
 
+// Firebase configuration para web app
 const firebaseConfig = {
   apiKey: "AIzaSyBtblDahBpfrT4CaLl2viS0D2890iJ_RFE",
   authDomain: "imperium-0001.firebaseapp.com",
@@ -24,32 +29,39 @@ const firebaseConfig = {
   measurementId: "G-M39V86RLKS",
 };
 
+// Inicializando o Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const db = getFirestore(app);
-const loginForm = document.getElementById("login-form");
+const mensagemFirebase = document.getElementById("mensagem-firebase");
+
+// Criação das variaveis do Formulario de login
+const loginForm = document.getElementById("form-login");
 const emailInput = document.getElementById("email-login");
 const passwordInput = document.getElementById("senha-login");
-const messageElement = document.getElementById("login-message");
 
+// Criação das variaveis do Formulario de cadastro
 const formCadastro = document.getElementById("form-cadastro");
-const mensagemFirebase = document.getElementById("mensagem-firebase");
-const senhaconfInput = document.getElementById("confirma_senha"); // <--- Variavel corrigida para o input
+const senhaconfInput = document.getElementById("confirma_senha");
 const emailInputCadastro = document.getElementById("email");
 const senhaInputCadastro = document.getElementById("senha");
 const nomeInputCadastro = document.getElementById("nome");
 const cpfInputCadastro = document.getElementById("CPF");
 const telInputCadastro = document.getElementById("tel"); // Assumindo que você tem um campo de telefone
 
+// Botão de login com Google
 document
   .getElementById("googleButton")
   .addEventListener("click", signInWithGoogle);
 
+document
+  .getElementById("googleButton2")
+  .addEventListener("click", signInWithGoogle);
 
+// Evento de submit do formulário de login
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  // messageElement.innerText = ""; // Esta linha pode ser removida
   const email = emailInput.value;
   const password = passwordInput.value;
   try {
@@ -81,6 +93,7 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
+// Evento de submit do formulário de cadastro
 formCadastro.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -159,6 +172,7 @@ formCadastro.addEventListener("submit", function (event) {
     });
 });
 
+// Login com Google
 async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, googleProvider);
@@ -172,6 +186,7 @@ async function signInWithGoogle() {
   }
 }
 
+// Função para processar o login no backend
 async function processBackendLogin(user) {
   try {
     const idToken = await user.getIdToken();

@@ -1,8 +1,4 @@
 /* Estilos do Pop-up */
-.hidden {
-    display: none;
-}
-
 #popup-overlay {
     position: fixed;
     top: 0;
@@ -14,6 +10,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#popup-overlay.hidden {
+    display: none;
 }
 
 #popup-card {

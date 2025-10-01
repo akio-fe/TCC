@@ -1,6 +1,10 @@
 <?php
 // php/login_handler.php
 
+// Add these lines for debugging. Remove them in production!
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 
 header('Content-Type: application/json');
@@ -13,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require __DIR__ . '/vendor/autoload.php';
+// Corrected path for vendor/autoload.php
+require __DIR__ . '/../vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Exception\Auth\ExpiredIdToken;
@@ -21,8 +26,9 @@ use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use Kreait\Firebase\Exception\Auth\InvalidToken;
 use \InvalidArgumentException;
 
+// Corrected path for your service account JSON file
 $factory = (new Factory)
-    ->withServiceAccount(__DIR__ . '/imperium-0001-firebase-adminsdk-fbsvc-ffc86182cf.json');
+    ->withServiceAccount(__DIR__ . '/../imperium-0001-firebase-adminsdk-fbsvc-ffc86182cf.json');
 $auth = $factory->createAuth();
 
 $headers = getallheaders();
