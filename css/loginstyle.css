@@ -149,6 +149,20 @@ p{
     }
 }
 
+/* Botão de Login com Google */
+.google-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* Espaço entre o ícone e o texto */
+  margin-top: 20px;
+}
+
+.google-login-button .google-icon {
+  width: 20px;
+  height: 20px;
+}
+
 /*BACKGROUND MOVEL*/
 
 .card::after{
@@ -246,3 +260,4 @@ p{
     opacity: 0;
     transition: all .3s 0;
 }
+
