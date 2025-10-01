@@ -46,9 +46,10 @@ document
   .getElementById("googleButton")
   .addEventListener("click", signInWithGoogle);
 
+
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  messageElement.innerText = "";
+  // messageElement.innerText = ""; // Esta linha pode ser removida
   const email = emailInput.value;
   const password = passwordInput.value;
   try {
@@ -76,7 +77,7 @@ loginForm.addEventListener("submit", async (e) => {
         errorMessage = "Erro desconhecido. Por favor, tente novamente.";
         break;
     }
-    messageElement.innerText = errorMessage;
+    showPopup(errorMessage, "red"); // Modificado
   }
 });
 
@@ -97,16 +98,14 @@ formCadastro.addEventListener("submit", function (event) {
   // Verifica se as senhas coincidem
   if (senha !== senhaconf) {
     senhaconfInput.setCustomValidity("As senhas não conferem");
-    mensagemFirebase.textContent = "As senhas não coincidem.";
-    mensagemFirebase.style.color = "red";
+    showPopup("As senhas não coincidem.", "red"); // Modificado
     return;
   } else {
     senhaconfInput.setCustomValidity("");
   }
 
   // Exibe mensagem de carregamento para o usuário
-  mensagemFirebase.textContent = "Processando cadastro...";
-  mensagemFirebase.style.color = "blue";
+  showPopup("Processando cadastro...", "blue"); // Modificado
 
   // 1. Criar o usuário no Firebase Authentication
   createUserWithEmailAndPassword(auth, email, senha)
@@ -133,9 +132,10 @@ formCadastro.addEventListener("submit", function (event) {
     })
     .then(() => {
       // 4. Exibir mensagem de sucesso
-      mensagemFirebase.textContent =
-        "Cadastro realizado com sucesso! Um e-mail de verificação foi enviado. Por favor, verifique sua caixa de entrada para ativar sua conta.";
-      mensagemFirebase.style.color = "green";
+      showPopup(
+        "Cadastro realizado com sucesso! Um e-mail de verificação foi enviado. Por favor, verifique sua caixa de entrada para ativar sua conta.",
+        "green"
+      ); // Modificado
       formCadastro.reset();
     })
     .catch((error) => {
@@ -154,8 +154,7 @@ formCadastro.addEventListener("submit", function (event) {
           "Erro de permissão no Firestore. Verifique suas regras de segurança.";
       }
 
-      mensagemFirebase.textContent = errorMessage;
-      mensagemFirebase.style.color = "red";
+      showPopup(errorMessage, "red"); // Modificado
       console.error(errorCode, error.message);
     });
 });
@@ -169,8 +168,7 @@ async function signInWithGoogle() {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.error("Erro de login com Google:", errorMessage);
-    messageElement.innerText =
-      "Erro ao fazer login com o Google: " + errorMessage;
+    showPopup("Erro ao fazer login com o Google: " + errorMessage, "red"); // Modificado
   }
 }
 
@@ -186,16 +184,16 @@ async function processBackendLogin(user) {
     });
     const result = await response.json();
     if (result.success) {
-      messageElement.innerText = "Login bem-sucedido! Redirecionando...";
+      showPopup("Login bem-sucedido! Redirecionando...", "green"); // Modificado
       console.log("Login com sucesso:", user);
       setTimeout(() => {
         window.location.href = "../php/login.php";
       }, 2000);
     } else {
-      messageElement.innerText = result.message;
+      showPopup(result.message, "red"); // Modificado
     }
   } catch (error) {
     console.error("Erro ao enviar token para o backend:", error);
-    messageElement.innerText = "Erro na comunicação com o servidor.";
+    showPopup("Erro na comunicação com o servidor.", "red"); // Modificado
   }
 }
